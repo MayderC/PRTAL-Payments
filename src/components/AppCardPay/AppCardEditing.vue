@@ -8,6 +8,7 @@
 <script>
 import { CURRENCY_FORMAT } from "@/common/constants";
 
+
 export default {
   name: "AppCradEditing",
   props: {
@@ -36,6 +37,8 @@ export default {
 };
 </script>
 <style scoped>
+
+
 .circle {
   width: 48px;
   height: 48px;

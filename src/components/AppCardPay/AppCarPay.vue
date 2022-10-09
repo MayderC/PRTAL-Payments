@@ -2,7 +2,7 @@
   <div class="card-container">
     <div class="line-left"></div>
     <AppCardEditing
-      v-if="canEdit"
+      v-if="canEdit && payment.status != status.paid"
       :index="index"
       :payment="payment"
     ></AppCardEditing>
@@ -19,6 +19,7 @@ import AppCardPending from "./AppCardPending.vue";
 import AppCardEditing from "./AppCardEditing.vue";
 import { mapMutations } from "vuex";
 import { createPayment } from "@/assets/helpers/createPayment";
+import { PAYMENT_STATUS } from "@/common/constants";
 
 export default {
   name: "AppCardPay",
@@ -34,7 +35,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      status: PAYMENT_STATUS,
+    };
   },
   components: { AppCardPending, AppCardEditing },
   computed: {},

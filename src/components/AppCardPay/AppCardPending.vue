@@ -15,6 +15,8 @@
 </template>
 <script>
 import { PAYMENT_STATUS } from '@/common/constants';
+import { mapMutations, mapState } from 'vuex';
+
 
 export default {
   name: "AppCradPending",
@@ -31,12 +33,18 @@ export default {
     paymentStatus : PAYMENT_STATUS
    }
   },
+  computed: {
+    ...mapState(['modalEditIndex', 'canShowModalEdit'])
+  },
   methods: {
+    ...mapMutations(['setEditIndex', 'setCanShowModal']),
+
     overPending(){
       console.log("ASxsd")
     },
     showModalEdit(){
-      console.log("SAXsdds")
+      this.setEditIndex(this.index)
+      this.setCanShowModal(true)
     }
   }
 };
@@ -67,8 +75,9 @@ export default {
   display: none;
   width: 100%;
   height: 100%;
-
+  z-index: 9;
 }
+
 .pending-circle:hover .edit{
   display: block;
   display: flex;

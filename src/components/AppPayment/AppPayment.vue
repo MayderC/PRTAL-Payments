@@ -35,32 +35,33 @@ export default {
     return {
       canEdit: false,
       copyEdit: [],
-      currentArr: [],
     };
   },
 
   created() {
-    this.copyEdit = this.paymentsEdit
-    this.currentArr = this.payments
-    this.updatePayments()
+    this.copyEdit = this.paymentsEdit;
+    this.currentArr = this.payments;
+    this.updatePayments();
+    this.setPayCurrent();
   },
 
   computed: {
-    ...mapState(["payments", "paymentsEdit"]),
+    ...mapState(["payments", "paymentsEdit", "currentArr"]),
   },
   components: { AppPaymentTopbar, AppCarPay },
   methods: {
-    ...mapMutations(["updatePayments"]),
+    ...mapMutations(["updatePayments", "setPayCurrent", "setEditCurrent"]),
     save() {
-      this.canEdit = false
-      this.updatePayments()
-      this.currentArr = JSON.parse(JSON.stringify(this.payments))
-
+      this.canEdit = false;
+      this.updatePayments();
+      //this.currentArr = JSON.parse(JSON.stringify(this.payments));
+      this.setPayCurrent();
     },
     editeAfterCreate() {
       this.canEdit = true;
-      this.copyEdit = this.payments
-      this.currentArr = this.paymentsEdit
+      this.copyEdit = this.payments;
+      //this.currentArr = this.paymentsEdit;
+      this.setEditCurrent();
     },
   },
 };

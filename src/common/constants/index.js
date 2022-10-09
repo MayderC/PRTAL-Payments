@@ -12,5 +12,5 @@ export const FORMAT_OPTIONS = {
 
 export const PAYMENT_STATUS = {
   pending: "PENDING",
-  editing: "EDITING",
+  paid: "PAID",
 };
