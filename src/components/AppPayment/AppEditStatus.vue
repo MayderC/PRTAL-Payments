@@ -20,14 +20,15 @@
       </ul>
       <div v-if="canShowDate" class="date">
         <label class="text-color" for="">Fecha de pago</label>
-        <input type="date" />
+        <input v-model="paidDate" type="date" />
       </div>
       <footer class="footer-btns">
         <div @click="deletePayment" class="delete">
           <img src="../../assets/imgs/detele-icon.svg" alt="" />
         </div>
+        {{paidDate | date}}
         <div class="save">
-          <AppButton text="Guardar"></AppButton>
+          <AppButton @on-click="saveUpdate" text="Guardar"></AppButton>
         </div>
       </footer>
     </div>
@@ -46,12 +47,13 @@ export default {
       status: PAYMENT_STATUS,
       canShowMenu: false,
       canShowDate: false,
+      paidDate: ""
     };
   },
   computed: {
     Mypayment: {
       get() {
-        return this.$store.state.payments[this.indexEdit];
+        return this.$store.state.paymentsEdit[this.indexEdit];
       },
     },
     indexEdit: {
@@ -72,6 +74,7 @@ export default {
       "setEditIndex",
       "setCanShowModal",
       "setPayCurrent",
+      "updatePayments"
     ]),
     setStatus(value) {
       this.canShowMenu = false;
@@ -83,6 +86,15 @@ export default {
       this.setCanShowModal(false);
       this.setPayCurrent();
     },
+    saveUpdate(){
+      this.paidDate = new Date(this.paidDate)
+      this.Mypayment.date = this.paidDate.setDate(this.paidDate.getDate() + 1);
+      this.updatePayments()
+      this.setEditIndex(null)
+      this.setCanShowModal(false)
+      this.setPayCurrent()
+
+    }
   },
   components: { AppButton },
 };

@@ -15,7 +15,6 @@ export default new Vuex.Store({
         id: Date.now(),
         name: "inicio",
         price: 200,
-        date: Date.now(),
         status: PAYMENT_STATUS.pending,
       },
     ],
@@ -24,32 +23,37 @@ export default new Vuex.Store({
         id: Date.now(),
         name: "inicio",
         price: 200,
-        date: Date.now(),
         status: PAYMENT_STATUS.pending,
       },
     ],
   },
   getters: {},
   mutations: {
+
+    // inserta un nuevo item, en la posicion especificada.
     savePayment(state, payload) {
       state.payments.splice(payload.index + 1, 0, payload.pay);
       state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
     },
+
+    // actualiza, payments con los nuevos datos del array modificado.
     updatePayments(state) {
       state.payments = JSON.parse(JSON.stringify(state.paymentsEdit));
     },
+
+    //Modal edit
     setEditIndex(state, index) {
       state.modalEditIndex = index;
     },
     setCanShowModal(state, value) {
       state.canShowModalEdit = value;
     },
-
     deleteItemPaymentsEdit(state, index) {
       state.paymentsEdit.splice(index, 1);
       state.payments = JSON.parse(JSON.stringify(state.paymentsEdit));
     },
 
+    // cambia, del array actual mostrado, show / edit
     setPayCurrent(state) {
       state.currentArr = state.payments;
     },

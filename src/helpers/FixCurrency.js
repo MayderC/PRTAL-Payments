@@ -1,7 +1,7 @@
 import {
   CURRENCY_FORMAT,
   FORMAT_OPTIONS,
-} from "./../../common/constants/index";
+} from "../common/constants/index";
 
 export const FixCurrency = (value) => {
   const num = Number(value);

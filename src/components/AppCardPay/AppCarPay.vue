@@ -18,7 +18,7 @@
 import AppCardPending from "./AppCardPending.vue";
 import AppCardEditing from "./AppCardEditing.vue";
 import { mapMutations } from "vuex";
-import { createPayment } from "@/assets/helpers/createPayment";
+import { createPayment } from "@/helpers/createPayment";
 import { PAYMENT_STATUS } from "@/common/constants";
 
 export default {
@@ -50,9 +50,14 @@ export default {
         pay,
         index: this.index,
       };
+      console.log(payload.pay)
       this.savePayment(payload);
       this.$emit("pay:created");
     },
+
+    addItem(){
+
+    }
   },
 };
 </script>

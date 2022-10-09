@@ -1,5 +1,5 @@
-import { formatDate } from "./assets/helpers/FormatDate";
-import { FixCurrency } from "./assets/helpers/FixCurrency";
+import { formatDate } from "./helpers/FormatDate";
+import { FixCurrency } from "./helpers/FixCurrency";
 
 import Vue from "vue";
 import App from "./App.vue";

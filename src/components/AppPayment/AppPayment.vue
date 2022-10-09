@@ -15,6 +15,11 @@
         :canEdit="canEdit"
         :index="index"
       />
+      <div v-if="currentArr.length == 0" class="card-add">
+      <div class="add-item" @click="addItem">
+        <img src="../../assets/imgs/Icon-add.svg" alt="">
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -23,6 +28,8 @@
 import AppPaymentTopbar from "./AppPaymentTopbar.vue";
 import AppCarPay from "../AppCardPay/AppCarPay.vue";
 import { mapMutations, mapState } from "vuex";
+import {createPayment}  from '@/helpers/createPayment'
+
 export default {
   name: "AppPayment",
   props: {
@@ -39,8 +46,7 @@ export default {
   },
 
   created() {
-    this.copyEdit = this.paymentsEdit;
-    this.currentArr = this.payments;
+    this.copyEdit = this.paymentsEdit;   
     this.updatePayments();
     this.setPayCurrent();
   },
@@ -50,27 +56,53 @@ export default {
   },
   components: { AppPaymentTopbar, AppCarPay },
   methods: {
-    ...mapMutations(["updatePayments", "setPayCurrent", "setEditCurrent"]),
+    ...mapMutations(["updatePayments", "setPayCurrent", "setEditCurrent", "savePayment"]),
     save() {
       this.canEdit = false;
       this.updatePayments();
-      //this.currentArr = JSON.parse(JSON.stringify(this.payments));
       this.setPayCurrent();
     },
     editeAfterCreate() {
       this.canEdit = true;
       this.copyEdit = this.payments;
-      //this.currentArr = this.paymentsEdit;
       this.setEditCurrent();
     },
+    addItem(){
+      console.log("aaa")
+      const pay = createPayment("", 0, 0);
+      const payload = {
+        pay,
+        index: this.index,
+      };
+      this.savePayment(payload);
+      this.canEdit = true
+    }
   },
 };
 </script>
 
 <style>
+
+.card-add{
+  width: 200px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-item{
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .payment {
   background: #fff;
-
   width: 848px;
   box-shadow: 0px 1px 0px #e2e8f0;
   border-radius: 8px;
