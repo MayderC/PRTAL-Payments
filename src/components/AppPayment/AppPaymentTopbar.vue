@@ -5,10 +5,15 @@
       <div><img src="../../assets/imgs/arrow-down.svg" alt="" /></div>
     </div>
     <div class="payment__rigth">
-      <button class="payment__rigth--edit">
+      <button
+        v-if="canEdit == false"
+        @click="$emit('can:edit')"
+        class="payment__rigth--edit"
+      >
         <p>Edit</p>
         <div><img src="../../assets/imgs/edit-icon.svg" alt="" /></div>
       </button>
+      <AppButton v-else @on-click="updatePaids" text="Guardar"></AppButton>
       <div class="payment__rigth--info-total">
         <p>
           Por cobrar <span> {{ 182 | currency }} </span>
@@ -19,12 +24,24 @@
 </template>
 
 <script>
+import AppButton from "../AppButton.vue";
 export default {
   name: "AppPaymentTopbar",
   props: {
     total: {
       type: Number,
       required: true,
+    },
+    canEdit: {
+      type: Boolean,
+    },
+  },
+  components: { AppButton },
+
+  methods: {
+    updatePaids() {
+      //todo, send data from vuex to endpoint. 
+      this.$emit("save:paid");
     },
   },
 };
@@ -61,6 +78,7 @@ export default {
   font-size: 1rem;
   font-weight: 600;
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
@@ -75,6 +93,10 @@ export default {
   height: 16px;
 }
 
+.payment__rigth--info-total {
+  display: flex;
+  align-items: center;
+}
 .payment__rigth--info-total p {
   color: var(--gray);
 }
@@ -87,10 +109,6 @@ button {
   border: none;
   font-family: Inter;
   color: var(--blue);
-  transition: transform 0.2s;
-}
-button:hover {
-  transform: scale(1.1);
   transition: transform 0.2s;
 }
 </style>

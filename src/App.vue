@@ -1,15 +1,17 @@
 <template>
   <div class="main">
     <AppPayment></AppPayment>
+    <AppEditStatus></AppEditStatus>
   </div>
 </template>
 
 <script>
 import AppPayment from "./components/AppPayment/AppPayment.vue";
+import AppEditStatus from "./components/AppPayment/AppEditStatus.vue";
 
 export default {
   name: "App",
-  components: { AppPayment },
+  components: { AppPayment, AppEditStatus },
 };
 </script>
 

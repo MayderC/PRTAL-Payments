@@ -9,3 +9,8 @@ export const FORMAT_OPTIONS = {
   maximumFractionDigits: 1,
   minimumFractionDigits: 0,
 };
+
+export const PAYMENT_STATUS = {
+  pending: "PENDING",
+  editing: "EDITING",
+};
