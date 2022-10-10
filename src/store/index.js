@@ -33,25 +33,24 @@ export default new Vuex.Store({
   },
   getters: {
     sumPricesPay(state){
-      return state.payments.reduce((acc, curr) => curr.price += acc , 0)
+      return state.payments.reduce((acc, curr) => acc += curr.price , 0)
     },
     remaining(state, getters){
-      return state.total - getters.sumPricesPay
+      return TOTAL - getters.sumPricesPay
     }
   },
   mutations: {
 
     // inserta un nuevo item, en la posicion especificada.
     savePayment(state, payload) {
-      state.payments.splice(payload.index + 1, 0, payload.pay);
-      state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
+
+      state.paymentsEdit.splice(payload.index + 1, 0, payload.pay);
     },
 
     // actualiza, payments con los nuevos datos del array modificado.
     updatePayments(state) {
-  
-      state.payments = JSON.parse(JSON.stringify(state.paymentsEdit));
-
+      state.payments = state.paymentsEdit
+      state.paymentsEdit = JSON.parse(JSON.stringify(state.payments))
     },
 
     //Modal edit

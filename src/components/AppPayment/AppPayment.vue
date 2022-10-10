@@ -2,7 +2,7 @@
   <div class="payment">
     <AppPaymentTopbar
       :total="182"
-      @can:edit="canEdit = !canEdit"
+      @can:edit="editAll"
       @save:paid="save"
       :canEdit="canEdit"
     />
@@ -46,9 +46,7 @@ export default {
   },
 
   created() {
- 
     this.setPayCurrent();
-
   },
 
   computed: {
@@ -65,6 +63,10 @@ export default {
     editeAfterCreate() {
       this.canEdit = true;
       this.setEditCurrent();
+    },
+    editAll(){
+      this.canEdit = true
+      this.setEditCurrent()
     },
     addItem(){
       console.log("aaa")

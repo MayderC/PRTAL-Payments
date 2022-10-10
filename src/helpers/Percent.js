@@ -1,4 +1,5 @@
-import store from "@/store";
+import { TOTAL } from "@/common/constants";
 
-export const valueFromPercent = (percent) => (store.state.total *(percent / 100)).toFixed(1)
-export const percentFromValue = (value) => (value / (store.state.total / 100)).toFixed(1)
+
+export const valueFromPercent = (percent) => (TOTAL *(percent / 100)).toFixed(1)
+export const percentFromValue = (value) => (value / (TOTAL / 100)).toFixed(1)
