@@ -55,8 +55,7 @@
 
 ## Todo
 
-- nuevo item empieza con el price del item anterior, por solucionar...
-- stylos css
+- styles css
 - fix date
 
 
