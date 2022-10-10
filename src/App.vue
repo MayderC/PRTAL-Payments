@@ -1,40 +1,55 @@
 <template>
   <div class="main">
     <AppPayment></AppPayment>
+    <AppEditStatus class="app-edit" v-if="canShowModalEdit"></AppEditStatus>
+    <div v-if="canShowModalEdit" class="shadow"></div>
   </div>
 </template>
 
 <script>
-import AppPayment from './components/AppPayment.vue';
+import AppPayment from "./components/AppPayment/AppPayment.vue";
+import AppEditStatus from "./components/AppPayment/AppEditStatus.vue";
+import { mapState } from "vuex";
 
 export default {
-    name: "App",
-    components: { AppPayment }
-}
+  name: "App",
+  components: { AppPayment, AppEditStatus },
+  computed: {
+    ...mapState(["canShowModalEdit"]),
+  },
+};
 </script>
 
 <style>
+@import "./assets/styles/common.css";
+@import "./assets/styles/variables.css";
 
-*::after, *::before, *{
-  box-sizing: border-box;
-}
-
-body{
-  background-color: #F5F5F5;
+body {
+  background-color: #f5f5f5;
   min-height: 100vh;
   margin: 0;
 }
 
-.main{
+.main {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  position: relative;
+}
+
+.shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000000b6;
+}
+
+.app-edit {
+  position: absolute;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;

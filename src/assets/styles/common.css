@@ -1,0 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+*::after, *::before, *{
+  box-sizing: border-box;
+}
+
+h1, h2, ul, p{
+  margin: 0;
+}
