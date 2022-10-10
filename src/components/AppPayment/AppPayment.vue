@@ -46,9 +46,9 @@ export default {
   },
 
   created() {
-  
-    this.updatePayments();
+ 
     this.setPayCurrent();
+
   },
 
   computed: {

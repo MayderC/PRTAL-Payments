@@ -1,3 +1,4 @@
+
 import Vue from "vue";
 import Vuex from "vuex";
 import { PAYMENT_STATUS, TOTAL } from "./../common/constants/index";
@@ -42,14 +43,15 @@ export default new Vuex.Store({
 
     // inserta un nuevo item, en la posicion especificada.
     savePayment(state, payload) {
-      console.log(payload.pay.price)
-      state.paymentsEdit.splice(payload.index + 1, 0, payload.pay);
-      //state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
+      state.payments.splice(payload.index + 1, 0, payload.pay);
+      state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
     },
 
     // actualiza, payments con los nuevos datos del array modificado.
     updatePayments(state) {
+  
       state.payments = JSON.parse(JSON.stringify(state.paymentsEdit));
+
     },
 
     //Modal edit
