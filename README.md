@@ -17,6 +17,8 @@
 
 - currency
 - date
+- percent
+- value
 
 ```js
 {{obj.date | date}}
