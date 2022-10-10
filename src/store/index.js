@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { PAYMENT_STATUS } from "./../common/constants/index";
+import { PAYMENT_STATUS, TOTAL } from "./../common/constants/index";
 
 Vue.use(Vuex);
 
@@ -10,30 +10,41 @@ export default new Vuex.Store({
     modalEditIndex: null,
     canShowModalEdit: false,
     currentArr: [],
+    total : TOTAL,
     payments: [
       {
         id: Date.now(),
         name: "inicio",
-        price: 200,
+
+        price: 50,
         status: PAYMENT_STATUS.pending,
       },
     ],
     paymentsEdit: [
       {
         id: Date.now(),
+
         name: "inicio",
-        price: 200,
+        price: 50,
         status: PAYMENT_STATUS.pending,
       },
     ],
   },
-  getters: {},
+  getters: {
+    sumPricesPay(state){
+      return state.payments.reduce((acc, curr) => curr.price += acc , 0)
+    },
+    remaining(state, getters){
+      return state.total - getters.sumPricesPay
+    }
+  },
   mutations: {
 
     // inserta un nuevo item, en la posicion especificada.
     savePayment(state, payload) {
-      state.payments.splice(payload.index + 1, 0, payload.pay);
-      state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
+      console.log(payload.pay.price)
+      state.paymentsEdit.splice(payload.index + 1, 0, payload.pay);
+      //state.paymentsEdit = JSON.parse(JSON.stringify(state.payments));
     },
 
     // actualiza, payments con los nuevos datos del array modificado.
@@ -60,6 +71,25 @@ export default new Vuex.Store({
     setEditCurrent(state) {
       state.currentArr = state.paymentsEdit;
     },
+
+    //total 1
+    addByOneTotal(state){
+      state.total = state.total +1
+    },
+    substraByOneTotal(state){
+      state.total = state.total -1
+    },
+
+    //total cantidad
+    addMountTotal(state, value){
+      state.total = state.total + value
+    },
+
+    substraMountTotal(state, value){
+      state.total = state.total - value
+    }
+
+
   },
 
   actions: {},

@@ -45,12 +45,11 @@ export default {
     ...mapMutations(["savePayment"]),
     addPayment() {
       if (this.canEdit) return;
-      const pay = createPayment("", 0, 0);
+      const pay = createPayment("", 0);
       const payload = {
         pay,
         index: this.index,
       };
-      console.log(payload.pay)
       this.savePayment(payload);
       this.$emit("pay:created");
     },

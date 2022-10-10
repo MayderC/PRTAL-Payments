@@ -2,11 +2,19 @@
   <div class="card">
     <div class="circle"></div>
     <input class="name" type="text" v-model="Mypayment.name" />
-    <input class="price" :placeholder="pricePlaceHolder" type="text" />
+    <input class="price" v-model.number="Mypayment.price" :placeholder="pricePlaceHolder" type="number" />
+    <div class="percent">
+      <button @click="sumPercent">+</button>
+      <p>{{Mypayment.price | percent}} %</p>
+    <button @click="substracPercent">-</button>
+    </div>
+
   </div>
 </template>
 <script>
 import { CURRENCY_FORMAT } from "@/common/constants";
+import { valueFromPercent } from "@/helpers/Percent";
+import { mapGetters } from "vuex";
 
 
 export default {
@@ -25,15 +33,35 @@ export default {
       modelPayment: {},
     };
   },
-
-
   computed: {
+    ...mapGetters(['sumPricesPay', 'remaining']),
     Mypayment: {
       get() {
         return this.$store.state.paymentsEdit[this.index];
       }
     },
   },
+
+  methods: {
+    sumPercent(){
+      this.Mypayment.price  = this.Mypayment.price + 1
+      this.Mypayment.percent = valueFromPercent(this.Mypayment.price)
+
+      //sumar, restar item siguiente si esta pendiente, y si este es indice 0,
+      //restar anterior, si esta pendiete, y este indice es mayor a 0
+
+    },
+    substracPercent(){
+      this.Mypayment.price = this.Mypayment.price - 1
+      this.Mypayment.percent = valueFromPercent(this.Mypayment.price)
+
+      ///restar, sumar item siguiente si esta pendiente, y si este es indice 0,
+      //sumar anterior, si esta pendiete, y este indice es mayor a 0
+
+    },
+
+  }
+
 };
 </script>
 <style scoped>
@@ -61,6 +89,11 @@ input {
 .name {
   font-weight: 600;
   font-size: 20px;
+}
+
+.price{
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .price::placeholder {

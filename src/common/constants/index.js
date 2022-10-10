@@ -14,3 +14,5 @@ export const PAYMENT_STATUS = {
   pending: "PENDING",
   paid: "PAID",
 };
+
+export const TOTAL = 182

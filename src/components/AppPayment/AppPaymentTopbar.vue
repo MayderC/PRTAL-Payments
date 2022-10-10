@@ -16,7 +16,7 @@
       <AppButton v-else @on-click="updatePaids" text="Guardar"></AppButton>
       <div class="payment__rigth--info-total">
         <p>
-          Por cobrar <span> {{ 182 | currency }} </span>
+          Por cobrar <span> {{ total | currency }} </span>
         </p>
       </div>
     </div>
@@ -24,23 +24,29 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import AppButton from "../AppButton.vue";
 export default {
   name: "AppPaymentTopbar",
   props: {
-    total: {
-      type: Number,
-      required: true,
-    },
+
     canEdit: {
       type: Boolean,
     },
   },
   components: { AppButton },
 
+  computed: {
+    ...mapState(['total'])
+  },
+
   methods: {
     updatePaids() {
-      //todo, send data from vuex to endpoint. 
+
+      //boton global edit, se abre la posibilidad de atualizar, cualquier elemento, con el status pendiente.
+
+      // @todo: api request update, actualizar todos los elemetos. 
+      // o crear algoritmo, verificar cuales fueron modificados y actualizar solo estos. 
       this.$emit("save:paid");
     },
   },

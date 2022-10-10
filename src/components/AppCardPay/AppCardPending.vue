@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div :class="[index != 0 ? 'circle' : 'border-first' ,'pending-circle']">
+    <div :class="[index != 0 ? 'circle' : 'border-first' ,'pending-circle', payment.status == paymentStatus.paid ? 'paid' : '' ]">
       <div v-if="payment.status == paymentStatus.pending" @click="showModalEdit" class="edit">
         <img src="../../assets/imgs/edit-icon.svg" alt=""/>
       </div>
@@ -8,9 +8,10 @@
     <p class="name">{{ payment.name }}</p>
     <div class="price">
       <p>{{ payment.price | currency }}</p>
-      <span>({{ payment.price * (30 / 100) }} %)</span>
+      <span>({{ payment.price | percent }}%)</span>
     </div>
     <p class="date">{{ payment.date | date }}</p>
+
   </div>
 </template>
 <script>
@@ -30,11 +31,12 @@ export default {
   },
   data(){
    return {
-    paymentStatus : PAYMENT_STATUS
+    paymentStatus : PAYMENT_STATUS,
+    percent: 0
    }
   },
   computed: {
-    ...mapState(['modalEditIndex', 'canShowModalEdit'])
+    ...mapState(['modalEditIndex', 'canShowModalEdit', 'total'])
   },
   methods: {
     ...mapMutations(['setEditIndex', 'setCanShowModal']),
@@ -55,6 +57,18 @@ export default {
   height: 48px;
   border: solid 3px var(--blue);
   border-radius: 100%;
+}
+.paid{
+  background: #10B981;
+  position: relative;
+}
+
+.paid::before{
+  content: "🎉";
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .name {

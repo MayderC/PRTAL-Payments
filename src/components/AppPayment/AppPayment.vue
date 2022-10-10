@@ -46,7 +46,7 @@ export default {
   },
 
   created() {
-    this.copyEdit = this.paymentsEdit;   
+  
     this.updatePayments();
     this.setPayCurrent();
   },
@@ -64,12 +64,11 @@ export default {
     },
     editeAfterCreate() {
       this.canEdit = true;
-      this.copyEdit = this.payments;
       this.setEditCurrent();
     },
     addItem(){
       console.log("aaa")
-      const pay = createPayment("", 0, 0);
+      const pay = createPayment("", 0);
       const payload = {
         pay,
         index: this.index,

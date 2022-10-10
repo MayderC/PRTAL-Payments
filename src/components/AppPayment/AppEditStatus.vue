@@ -74,7 +74,8 @@ export default {
       "setEditIndex",
       "setCanShowModal",
       "setPayCurrent",
-      "updatePayments"
+      "updatePayments",
+      "substraMountTotal"
     ]),
     setStatus(value) {
       this.canShowMenu = false;
@@ -85,14 +86,27 @@ export default {
       this.setEditIndex(null);
       this.setCanShowModal(false);
       this.setPayCurrent();
+
+      //@todo: api request delete, eliminar elemento apartir del id
+
     },
     saveUpdate(){
       this.paidDate = new Date(this.paidDate)
       this.Mypayment.date = this.paidDate.setDate(this.paidDate.getDate() + 1);
+
+      if(this.Mypayment.status == this.status.paid){
+        this.substraMountTotal(this.Mypayment.price)
+      }
+
       this.updatePayments()
       this.setEditIndex(null)
       this.setCanShowModal(false)
       this.setPayCurrent()
+
+
+  
+
+      //@todo: api request update, para actualizar el elemtto apartir del id.
 
     }
   },

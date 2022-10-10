@@ -1,29 +1,4 @@
 # payments
-
-## Project setup
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
 # Doc
 
 ## Constants
@@ -76,8 +51,38 @@ npm run lint
 - Arreglo paymentsEdit para realizar cambios.
 - una vez realizados los cambios, se guardan los datos del arreglo edit. al original
 
-- Una variable que apunta o hace referencia al arreglo original cuando se muestran los datos, cuando se hace click e edit, esta cambia de referencia apuntando al arreglo edit. Para poder trabajar con este.
+- Una variable que apunta o hace referencia al arreglo original cuando se muestran los datos, cuando se hace click e edit, esta cambia de referencia apuntando al arreglo edit. Para poder trabajar con este
 
+## Todo
+
+- nuevo item empieza con el price del item anterior, por solucionar...
+- stylos css
+- fix date
+
+
+## Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Lints and fixes files
+
+```
+npm run lint
+```
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
